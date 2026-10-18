@@ -741,11 +741,88 @@ a {
     transform: translateY(0);
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 968px) {
+/* ===== Mobile Navigation ===== */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 1050;
+}
+
+.nav-toggle span {
+    width: 26px;
+    height: 2px;
+    background: var(--text-primary);
+    transition: all 0.3s;
+}
+
+.nav-toggle.active span:nth-child(1) {
+    transform: translateY(-1px) rotate(45deg);
+}
+
+.nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+    transform: translateY(1px) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 75%;
+        max-width: 320px;
+        height: 100vh;
+        background: var(--bg-secondary);
+        border-left: 1px solid var(--border);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2.2rem;
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1040;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links a {
+        font-size: 1.1rem;
+        color: var(--text-primary);
+    }
+}
+
+/* ===== Small phones ===== */
+@media (max-width: 480px) {
+    .nav-links {
+        width: 85%;
+        max-width: 260px;
+    }
+
+    .container {
+        padding: 0 1.2rem;
+    }
+
+    .nav-container {
+        padding: 0 1.2rem;
+    }
+
     .hero-grid {
         grid-template-columns: 1fr;
         text-align: center;
+        gap: 2rem;
     }
 
     .hero-visual {
@@ -761,19 +838,23 @@ a {
         justify-content: center;
     }
 
-    .about-grid {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
+    .section {
+        padding: 4rem 0;
     }
+}
 
+/* ===== Tablets (landscape) ===== */
+@media (max-width: 1024px) {
     .services-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .research-grid {
         grid-template-columns: 1fr;
     }
 
+    .about-grid,
+    .collaborate-grid,
     .contact-grid {
         grid-template-columns: 1fr;
         gap: 2.5rem;
