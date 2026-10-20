@@ -67,23 +67,42 @@ const revealObserver = new IntersectionObserver((entries) => {
 
 revealElements.forEach(el => revealObserver.observe(el));
 
-// ===== Contact form =====
+// ===== Contact form (EmailJS) =====
 const contactForm = document.getElementById('contact-form');
 const formSuccess = document.getElementById('form-success');
+const submitBtn = contactForm.querySelector('button[type="submit"]');
 
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = new FormData(contactForm);
     const data = Object.fromEntries(formData);
-    
-    // Build email body
-    const subject = data.subject || 'Project Inquiry';
-    const body = `From: ${data.name} <${data.email}>\n\n${data.message}`;
-    const mailtoLink = `mailto:vijay.v.scientific@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    
-    // Open default mail client
-    window.location.href = mailtoLink;
-    
-    formSuccess.textContent = 'Opening your email client...';
-    contactForm.reset();
+
+    const params = {
+        from_name: data.name || '',
+        from_email: data.email || '',
+        subject: data.subject || 'Project Inquiry',
+        message: data.message || ''
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+    formSuccess.textContent = '';
+    formSuccess.classList.remove('error');
+
+    emailjs.send('service_nlwyopq', 'template_jgql5np', params)
+        .then(() => {
+            formSuccess.textContent = 'Message sent! I\'ll get back to you soon.';
+            formSuccess.classList.remove('error');
+            formSuccess.classList.add('success');
+            contactForm.reset();
+        })
+        .catch((err) => {
+            console.error('Contact form error:', err);
+            formSuccess.textContent = 'Something went wrong. Please email me directly.';
+            formSuccess.classList.add('error');
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send Message';
+        });
 });
