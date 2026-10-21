@@ -10,7 +10,7 @@ window.addEventListener('scroll', () => {
 
 // ===== Active nav highlighting =====
 const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.nav-link');
+const navLinkItems = document.querySelectorAll('.nav-link');
 
 function highlightNav() {
     const scrollY = window.scrollY || document.documentElement.scrollTop;
@@ -19,7 +19,7 @@ function highlightNav() {
         const sectionHeight = section.offsetHeight;
         const sectionId = section.getAttribute('id');
         if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-            navLinks.forEach(link => link.classList.remove('active'));
+            navLinkItems.forEach(link => link.classList.remove('active'));
             const activeLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
             if (activeLink) activeLink.classList.add('active');
         }
