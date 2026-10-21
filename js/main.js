@@ -98,8 +98,10 @@ contactForm.addEventListener('submit', (e) => {
         })
         .catch((err) => {
             console.error('Contact form error:', err);
-            formSuccess.textContent = 'ERROR: ' + (err && err.text ? err.text() : JSON.stringify(err)) + ' | Please email me directly.';
+            const msg = (err && err.text) ? err.text() : JSON.stringify(err);
+            formSuccess.textContent = 'ERROR: ' + msg + ' | Please email me directly.';
             formSuccess.classList.add('error');
+            document.title = 'ERR:' + msg;
         })
         .finally(() => {
             submitBtn.disabled = false;
