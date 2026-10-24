@@ -81,8 +81,7 @@ contactForm.addEventListener('submit', (e) => {
         from_name: data.name || '',
         from_email: data.email || '',
         subject: data.subject || 'Project Inquiry',
-        message: data.message || '',
-        to_email: 'vijay.v.scientific@gmail.com'
+        message: data.message || ''
     };
 
     submitBtn.disabled = true;
