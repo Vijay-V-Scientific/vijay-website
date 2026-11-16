@@ -1201,3 +1201,24 @@ a {
 .api-demo-preview { flex-direction: column; gap: 0.6rem; }
 .qr-box img, .qr-box canvas { display: block; max-width: 176px; }
 .qr-caption { color: #06060f; font-size: 0.75rem; text-align: center; word-break: break-all; max-width: 190px; }
+
+/* Showcase video */
+.showcase-fig {
+    margin: 0 auto;
+    max-width: 900px;
+}
+.showcase-video {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(99, 102, 241, 0.12);
+    background: #000;
+}
+.showcase-cap {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 0.9rem;
+}
