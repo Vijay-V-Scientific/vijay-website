@@ -117,7 +117,7 @@ function prefillContact(subject) {
     if (contact) contact.scrollIntoView({ behavior: 'smooth' });
     const formSuccess = document.getElementById('form-success');
     if (formSuccess) {
-        formSuccess.textContent = 'Secure card checkout is being set up — send this and I\u2019ll reply with a payment link today.';
+        formSuccess.textContent = 'Secure card checkout is being set up \u2014 send this and I\u2019ll reply with a payment link today.';
         formSuccess.classList.remove('error');
     }
     setTimeout(() => { const n = document.getElementById('name'); if (n) n.focus(); }, 600);
@@ -138,44 +138,73 @@ document.querySelectorAll('.buy').forEach((a) => {
     });
 });
 
-// ===== Live QR demo (client-side, no backend needed) =====
+// ===== Live QR demo - calls the real V-Scientific API, falls back to local lib =====
 (function () {
+    const API = 'https://api.vijay-v-scientific.com/qr/generate';
     const btn = document.getElementById('qr-make');
     const input = document.getElementById('qr-input');
     const preview = document.getElementById('qr-preview');
     if (!btn || !input || !preview) return;
 
-    function makeQR() {
-        const text = input.value.trim();
-        if (!text) return;
+    let lastURL = null;
+
+    // If the API is ever unreachable, still show a QR using the bundled library.
+    function fallbackClient(text) {
         if (typeof QRCode === 'undefined') {
             preview.innerHTML = '<p class="api-hint">QR library still loading\u2026 try again in a second.</p>';
             return;
         }
         preview.innerHTML = '';
         try {
-            // qrcodejs renders an <img> (or canvas) into the element
             const box = document.createElement('div');
             box.className = 'qr-box';
             preview.appendChild(box);
             new QRCode(box, {
-                text: text,
-                width: 176,
-                height: 176,
-                colorDark: '#06060f',
-                colorLight: '#ffffff',
+                text: text, width: 176, height: 176,
+                colorDark: '#06060f', colorLight: '#ffffff',
                 correctLevel: QRCode.CorrectLevel.M
             });
-            const cap = document.createElement('p');
-            cap.className = 'qr-caption';
-            cap.textContent = 'Generated for: ' + (text.length > 42 ? text.slice(0, 42) + '…' : text);
-            preview.appendChild(cap);
         } catch (err) {
             preview.innerHTML = '<p class="api-hint">Could not generate that QR.</p>';
         }
     }
+
+    async function makeQR() {
+        const text = input.value.trim();
+        if (!text) return;
+        const original = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = 'Generating\u2026';
+        try {
+            const fd = new FormData();
+            fd.append('text', text);
+            fd.append('size', '10');
+            fd.append('color', '#06060f');
+            const res = await fetch(API, { method: 'POST', body: fd });
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            const blob = await res.blob();
+            if (!blob.type.startsWith('image/')) throw new Error('not an image');
+            if (lastURL) URL.revokeObjectURL(lastURL);
+            lastURL = URL.createObjectURL(blob);
+            preview.innerHTML = '';
+            const img = document.createElement('img');
+            img.src = lastURL;
+            img.alt = 'QR code for ' + text;
+            img.addEventListener('error', () => fallbackClient(text));
+            preview.appendChild(img);
+            const cap = document.createElement('p');
+            cap.className = 'qr-caption';
+            cap.textContent = 'Live from the API \u00b7 ' + (text.length > 36 ? text.slice(0, 36) + '\u2026' : text);
+            preview.appendChild(cap);
+        } catch (err) {
+            console.warn('API QR failed, using local generator:', err);
+            fallbackClient(text);
+        } finally {
+            btn.disabled = false;
+            btn.textContent = original;
+        }
+    }
     btn.addEventListener('click', makeQR);
     input.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); makeQR(); } });
-    // draw one on load after the QR lib is ready
     window.addEventListener('load', () => setTimeout(makeQR, 300));
 })();
