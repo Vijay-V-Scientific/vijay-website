@@ -231,6 +231,13 @@ a {
     flex-wrap: wrap;
 }
 
+.hero-micro {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    max-width: 46ch;
+}
+
 .orb {
     position: relative;
     width: 100%;
