@@ -208,3 +208,45 @@ document.querySelectorAll('.buy').forEach((a) => {
     input.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); makeQR(); } });
     window.addEventListener('load', () => setTimeout(makeQR, 300));
 })();
+
+// ===== V-Scientific API: one-click free key =====
+(function () {
+  const btn = document.getElementById('get-key-btn');
+  const out = document.getElementById('key-out');
+  const val = document.getElementById('key-value');
+  if (!btn || !out || !val) return;
+  let busy = false;
+  btn.addEventListener('click', async () => {
+    if (busy) return;
+    busy = true;
+    const orig = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Issuing…';
+    try {
+      const r = await fetch('https://api.vijay-v-scientific.com/key', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({})
+      });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const d = await r.json();
+      val.textContent = d.api_key;
+      out.hidden = false;
+      btn.textContent = 'Key ready — click to copy';
+      btn.disabled = false;
+      busy = false;
+      try { navigator.clipboard && navigator.clipboard.writeText(d.api_key); } catch (e) {}
+      btn.onclick = () => {
+        try { navigator.clipboard && navigator.clipboard.writeText(d.api_key); } catch (e) {}
+        btn.textContent = 'Copied ✓';
+        setTimeout(() => { btn.textContent = 'Key ready — click to copy'; }, 1400);
+      };
+      out.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } catch (e) {
+      btn.textContent = orig;
+      btn.disabled = false;
+      busy = false;
+      alert('Could not reach the API right now — email vijay.v.scientific@gmail.com for a key.');
+    }
+  });
+})();

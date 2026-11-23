@@ -329,7 +329,7 @@
         <div class="container">
             <h3 class="section-label">For Developers</h3>
             <h2 class="section-title">The V-Scientific API</h2>
-            <p class="section-lead">Stateless image, QR/barcode and data endpoints you can call from any language. No signup walls, no flaky limits — pay as you go from free.</p>
+            <p class="section-lead">Stateless image, QR and data endpoints you can call from any language. Grab a free API key in one click, then pay only as you go — every call costs a small number of credits.</p>
             <div class="api-grid">
                 <div class="api-endpoints">
                     <div class="api-endpoint"><code class="verb">POST</code><code class="path">/image/info</code><span>Dimensions, format, EXIF</span></div>
@@ -338,7 +338,7 @@
                     <div class="api-endpoint"><code class="verb">POST</code><code class="path">/image/thumbnail</code><span>Fast thumbnails</span></div>
                     <div class="api-endpoint"><code class="verb">POST</code><code class="path">/image/exif-strip</code><span>Remove metadata / GPS</span></div>
                     <div class="api-endpoint"><code class="verb">POST</code><code class="path">/qr/generate</code><span>QR code from text or URL</span></div>
-                    <div class="api-endpoint"><code class="verb">POST</code><code class="path">/qr/decode</code><span>Read a QR / barcode</span></div>
+                    <div class="api-endpoint"><code class="verb">POST</code><code class="path">/text/stats</code><span>Word / line / char counts</span></div>
                     <div class="api-endpoint"><code class="verb">POST</code><code class="path">/csv/to-json</code><span>CSV to clean JSON</span></div>
                 </div>
                 <div class="api-demo">
@@ -351,16 +351,34 @@
                         <p class="api-hint">Live QR demo — the real API endpoint powers this.</p>
                     </div>
                     <div class="api-code">
-<pre><code>curl -F "text=https://example.com" \
-  https://api.vijay-v-scientific.com/qr/generate \
+<pre><code># 1. get a free key (one POST)
+curl -X POST https://api.vijay-v-scientific.com/key \
+  -H "Content-Type: application/json" \
+  -d '{"email":"you@example.com"}'
+
+# 2. call any endpoint with your key
+curl -X POST https://api.vijay-v-scientific.com/qr/generate \
+  -H "x-api-key: vsc_YOUR_KEY" \
+  --data-urlencode "text=https://example.com" \
   -o qr.png</code></pre>
                     </div>
-                    <div class="api-tiers">
-                        <div class="tier"><strong>Free</strong><span>200 calls / mo</span></div>
-                        <div class="tier"><strong>Starter</strong><span>£9 / 25k calls</span></div>
-                        <div class="tier"><strong>Growth</strong><span>£29 / 100k calls</span></div>
+                    <p class="api-price-line">Free <strong>200</strong> credits / mo · Starter <strong>£9</strong>/mo 25k · Growth <strong>£29</strong>/mo 100k · Scale <strong>£99</strong>/mo 500k · one-time top-ups from <strong>£5</strong>.</p>
+                    <div class="api-buy-row">
+                        <button class="btn btn-primary" id="get-key-btn" type="button">Get a free API key</button>
+                        <a class="btn btn-secondary buy" href="https://buy.stripe.com/14A6oAcY932w6QA6Tz2400h" data-fallback="V-Scientific API Starter (£9/mo)">Starter · £9/mo</a>
+                        <a class="btn btn-secondary buy" href="https://buy.stripe.com/14A3co9LXauYa2M6Tz2400i" data-fallback="V-Scientific API Growth (£29/mo)">Growth · £29/mo</a>
+                        <a class="btn btn-secondary buy" href="https://buy.stripe.com/aFa6oA8HTfPideY5Pv2400j" data-fallback="V-Scientific API Scale (£99/mo)">Scale · £99/mo</a>
                     </div>
-                    <a class="btn btn-secondary buy" href="https://buy.stripe.com/8x2eV6gal32w2Akgu924004" data-fallback="V-Scientific API Starter (£9/mo)">Get an API key</a>
+                    <div class="api-topups">Top up any time:
+                        <a class="buy" href="https://buy.stripe.com/4gM6oAe2d1Ysfn6cdT2400k" data-fallback="5,500 API credits (£5)">5.5k · £5</a>
+                        <a class="buy" href="https://buy.stripe.com/4gM5kw7DP0Uo6QA7XD2400l" data-fallback="25,000 API credits (£20)">25k · £20</a>
+                        <a class="buy" href="https://buy.stripe.com/3cI28k2jv6eI2Ak5Pv2400m" data-fallback="60,000 API credits (£50)">60k · £50</a>
+                    </div>
+                    <div class="api-keyout" id="key-out" hidden>
+                        <p>Your free API key — <strong>copy and save it now</strong>:</p>
+                        <code id="key-value"></code>
+                        <p class="api-hint">Send it as the <code>x-api-key</code> header. 200 credits included, no card needed.</p>
+                    </div>
                 </div>
             </div>
         </div>

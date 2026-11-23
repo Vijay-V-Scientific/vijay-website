@@ -1303,3 +1303,16 @@ a {
 @media (max-width: 768px) {
     .steps { grid-template-columns: 1fr; }
 }
+
+/* ===== API key signup + real pricing (v-scientific credits) ===== */
+.api-price-line { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1rem; }
+.api-price-line strong { color: var(--accent-light); font-weight: 600; }
+.api-buy-row { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 0.9rem; }
+.api-buy-row .btn { flex: 1 1 auto; text-align: center; }
+.api-topups { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem; }
+.api-topups a { color: var(--accent-light); text-decoration: none; margin: 0 0.5rem; border-bottom: 1px dashed rgba(6, 182, 212, 0.4); }
+.api-topups a:hover { color: #fff; border-bottom-color: var(--accent); }
+.api-keyout { background: rgba(6, 182, 212, 0.08); border: 1px solid rgba(6, 182, 212, 0.35); border-radius: 10px; padding: 1rem; }
+.api-keyout p { margin: 0 0 0.5rem; font-size: 0.9rem; color: var(--text-primary); }
+.api-keyout code { display: block; background: #0a0a14; border-radius: 6px; padding: 0.7rem 0.9rem; font-family: 'Space Grotesk', monospace; font-size: 0.82rem; color: #a5f3fc; word-break: break-all; margin-bottom: 0.6rem; }
+@media (max-width: 600px) { .api-buy-row { flex-direction: column; } }
