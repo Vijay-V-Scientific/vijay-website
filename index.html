@@ -162,15 +162,15 @@
     <!-- Showcase -->
     <section class="section showcase" id="showcase">
         <div class="container">
-            <h3 class="section-label">Real Work, Real Machines</h3>
-            <h2 class="section-title">Watch an AI learn to walk</h2>
-            <p class="section-lead">A reinforcement-learning policy I trained in NVIDIA Isaac Sim controls a Unitree&nbsp;G1 humanoid across uneven, obstacle-strewn terrain — sim-to-real ready. This is the kind of custom AI I build.</p>
+            <h3 class="section-label">Real Work, Real Physics</h3>
+            <h2 class="section-title">Open-loop misses by 199&nbsp;mm. LitSim lands within 2.</h2>
+            <p class="section-lead">LitSim is my own robot-simulation engine — built from scratch on MuJoCo — and this is a real task run through it. A faithful UR5e arm is designed on a <em>nominal</em> model, then run on <em>unseen</em> real-world hardware: heavier links, motor lag, and noisy, delayed encoders. Left, the usual approach (burn the setpoints) ends 199&nbsp;mm away. Right, LitSim's closed-loop controller watches the encoders and lands on target — every one of 16 randomised hardware worlds.</p>
             <figure class="showcase-fig">
-                <video class="showcase-video" controls playsinline preload="metadata" poster="assets/g1-poster.jpg">
-                    <source src="assets/g1-terrain-demo.mp4" type="video/mp4">
+                <video class="showcase-video" controls playsinline loop preload="metadata" poster="assets/litsim-hero-poster.jpg">
+                    <source src="assets/litsim-hero-s2r.mp4" type="video/mp4">
                     Your browser can't play this video.
                 </video>
-                <figcaption class="showcase-cap">Unitree G1 · terrain locomotion · trained in Isaac Sim (PhysX) · 8 s, 720p</figcaption>
+                <figcaption class="showcase-cap">LitSim sim-to-real on a UR5e (Google DeepMind Menagerie model) · same controller design, two hardware worlds · green = landed inside 20&nbsp;mm · rendered headlessly, zero GPU</figcaption>
             </figure>
         </div>
     </section>
@@ -453,6 +453,25 @@ curl -X POST https://api.vijay-v-scientific.com/qr/generate \
                     <a class="btn btn-primary buy" href="https://buy.stripe.com/6oU14g4rD8mQdeYdhX24007" data-fallback="VisionPipeline source licence (£499)">Buy Licence</a>
                     <a class="btn btn-secondary buy btn-sm" href="https://buy.stripe.com/6oU4gsbU5cD61wgcdT24008" data-fallback="VisionPipeline demo (£0)">See a demo (£0)</a>
                     <p class="tool-meta">Want it as a hosted API instead? <a href="#api">See the API</a>.</p>
+                </div>
+            </div>
+            <div class="software-card">
+                <div class="software-info">
+                    <div class="tool-icon">🤖</div>
+                    <h4>LitSim — Robot Simulation &amp; Sim-to-Real</h4>
+                    <p>My own robot-simulation engine, built from scratch on MuJoCo: physics, control, a hardware bridge and domain randomisation in one small package. Design a controller once, then run it unchanged on real, unseen hardware — proven below, not promised.</p>
+                    <ul class="price-list">
+                        <li><strong>Sim-to-real, measured:</strong> a UR5e lands within 2&nbsp;mm in 16 of 16 randomised hardware worlds (199&nbsp;mm off without it)</li>
+                        <li>4 built-in robots, and drives 71 real models (UR5e, Franka, Spot…) via MuJoCo Menagerie</li>
+                        <li>~300–5,000× realtime on one CPU core, no GPU — runs alongside your other work; 32&nbsp;KB wheel</li>
+                        <li>Hardware serial bridge + domain randomisation, validated across 20 randomised worlds</li>
+                    </ul>
+                </div>
+                <div class="software-buy">
+                    <div class="price-amount">£199</div>
+                    <p class="price-desc">One-time · full source licence</p>
+                    <a class="btn btn-primary buy" href="https://buy.stripe.com/aFa00c8HTcD6fn66Tz2400n" data-subject="Purchase: LitSim — source licence (£199)">Get LitSim</a>
+                    <p class="tool-meta">Python 3.10+ · Windows &amp; Linux. Command-line, no account needed.</p>
                 </div>
             </div>
         </div>
