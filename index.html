@@ -462,6 +462,7 @@ curl -X POST https://api.vijay-v-scientific.com/qr/generate \
                     <p>My own robot-simulation engine, built from scratch on MuJoCo: physics, control, a hardware bridge and domain randomisation in one small package. Design a controller once, then run it unchanged on real, unseen hardware — proven below, not promised.</p>
                     <ul class="price-list">
                         <li><strong>Sim-to-real, measured:</strong> a UR5e reaches its target in 16 of 16 randomised hardware worlds — worst 3.0&nbsp;mm, median 2.2&nbsp;mm (open-loop 202&nbsp;mm off)</li>
+                        <li><strong>One method, two real arms:</strong> the same controller with no retuning drives a Franka Panda too — 16 of 16 worlds, worst 6.8&nbsp;mm, median 1.8&nbsp;mm (open-loop 1&nbsp;of&nbsp;16)</li>
                         <li>4 built-in robots, and drives 71 real models (UR5e, Franka, Spot…) via MuJoCo Menagerie</li>
                         <li>~300–5,000× realtime on one CPU core, no GPU — runs alongside your other work; 32&nbsp;KB wheel</li>
                         <li>Hardware serial bridge + domain randomisation, validated across 20 randomised worlds</li>
