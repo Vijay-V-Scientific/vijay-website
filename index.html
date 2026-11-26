@@ -172,6 +172,14 @@
                 </video>
                 <figcaption class="showcase-cap">LitSim sim-to-real on a UR5e (Google DeepMind Menagerie model) · same controller design, two hardware worlds · green = landed inside 20&nbsp;mm · rendered headlessly, zero GPU</figcaption>
             </figure>
+            <p class="section-lead" style="margin-top:2.2rem">The same controller, with <strong>no retuning whatsoever</strong>, dropped onto a different industrial arm: the Franka Emika Panda. It has seven joints (not six), no tool-mounting site — so LitSim resolves the hand through a body Jacobian instead — and stiffer servos. Left, the open-loop setpoints miss by 218&nbsp;mm. Right, the identical LitSim law lands on target. Across 16 unseen randomised hardware worlds it never missed by more than 6.8&nbsp;mm (median 1.8&nbsp;mm).</p>
+            <figure class="showcase-fig">
+                <video class="showcase-video" controls playsinline loop preload="metadata" poster="assets/litsim-franka-poster.jpg">
+                    <source src="assets/litsim-franka-s2r.mp4" type="video/mp4">
+                    Your browser can't play this video.
+                </video>
+                <figcaption class="showcase-cap">The same LitSim controller — zero retuning — on a Franka Panda (Google DeepMind Menagerie model) · green = landed inside 20&nbsp;mm · rendered headlessly, zero GPU</figcaption>
+            </figure>
         </div>
     </section>
 
