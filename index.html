@@ -163,7 +163,7 @@
     <section class="section showcase" id="showcase">
         <div class="container">
             <h3 class="section-label">Real Work, Real Physics</h3>
-            <h2 class="section-title">Open-loop misses by 199&nbsp;mm. LitSim lands within 2.</h2>
+            <h2 class="section-title">Open-loop misses by 202&nbsp;mm. LitSim lands within 3.2&nbsp;mm.</h2>
             <p class="section-lead">LitSim is my own robot-simulation engine — built from scratch on MuJoCo — and this is a real task run through it. A faithful UR5e arm is designed on a <em>nominal</em> model, then run on <em>unseen</em> real-world hardware: heavier links, motor lag, and noisy, delayed encoders. Left, the usual approach (burn the setpoints) ends 199&nbsp;mm away. Right, LitSim's closed-loop controller watches the encoders and lands on target — every one of 16 randomised hardware worlds.</p>
             <figure class="showcase-fig">
                 <video class="showcase-video" controls playsinline loop preload="metadata" poster="assets/litsim-hero-poster.jpg">
@@ -461,7 +461,7 @@ curl -X POST https://api.vijay-v-scientific.com/qr/generate \
                     <h4>LitSim — Robot Simulation &amp; Sim-to-Real</h4>
                     <p>My own robot-simulation engine, built from scratch on MuJoCo: physics, control, a hardware bridge and domain randomisation in one small package. Design a controller once, then run it unchanged on real, unseen hardware — proven below, not promised.</p>
                     <ul class="price-list">
-                        <li><strong>Sim-to-real, measured:</strong> a UR5e lands within 2&nbsp;mm in 16 of 16 randomised hardware worlds (199&nbsp;mm off without it)</li>
+                        <li><strong>Sim-to-real, measured:</strong> a UR5e reaches its target in 16 of 16 randomised hardware worlds — worst 3.2&nbsp;mm, median 2.1&nbsp;mm (open-loop 202&nbsp;mm off)</li>
                         <li>4 built-in robots, and drives 71 real models (UR5e, Franka, Spot…) via MuJoCo Menagerie</li>
                         <li>~300–5,000× realtime on one CPU core, no GPU — runs alongside your other work; 32&nbsp;KB wheel</li>
                         <li>Hardware serial bridge + domain randomisation, validated across 20 randomised worlds</li>
