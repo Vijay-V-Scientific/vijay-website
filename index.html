@@ -180,6 +180,46 @@
                 </video>
                 <figcaption class="showcase-cap">The same LitSim controller — zero retuning — on a Franka Panda (Google DeepMind Menagerie model) · green = landed inside 20&nbsp;mm · rendered headlessly, zero GPU</figcaption>
             </figure>
+            <h3 class="section-label" style="margin-top:3.4rem">Not just arms</h3>
+            <p class="section-lead">The same LitSim engine — its bridge, its randomiser, its controllers — driven on five different <em>kinds</em> of robot, each solved for its own physics, then run through 16+ unseen randomised hardware worlds. Every number below is measured, headless, on CPU.</p>
+            <div class="rt-grid">
+                <div class="rt-card">
+                    <div class="rt-icon">🦾</div>
+                    <h4>Manipulator arm</h4>
+                    <p class="rt-model">UR5e / Franka Panda · 6–7&nbsp;DOF</p>
+                    <p class="rt-task">Pick &amp; place under mass, gain, damping and motor-lag randomisation. The open loop misses by ~20&nbsp;cm; LitSim's closed loop lands on target.</p>
+                    <span class="rt-badge">16/16 · worst 3.0&nbsp;mm</span>
+                </div>
+                <div class="rt-card">
+                    <div class="rt-icon">🐕</div>
+                    <h4>Quadruped</h4>
+                    <p class="rt-model">Unitree Go2 · 12&nbsp;actuated legs</p>
+                    <p class="rt-task">Hold a standing crouch against ±20% mass, gain, damping and timestep, plus latency, lag, noise and bias on the encoders.</p>
+                    <span class="rt-badge">16/16 · worst 7.3&nbsp;mm</span>
+                </div>
+                <div class="rt-card">
+                    <div class="rt-icon">🛸</div>
+                    <h4>Quadrotor</h4>
+                    <p class="rt-model">Skydio X2 · free-flying 6-DOF</p>
+                    <p class="rt-task">Hover and reject a wind gust through quaternion attitude control and rotor-mixer allocation. Open-loop loses metres of height; LitSim holds position and stays level.</p>
+                    <span class="rt-badge">16/16 · holds hover</span>
+                </div>
+                <div class="rt-card">
+                    <div class="rt-icon">🤖</div>
+                    <h4>Humanoid</h4>
+                    <p class="rt-model">Unitree G1 · 29&nbsp;DOF, bipedal</p>
+                    <p class="rt-task">Hold the standing stance. A naive arm-style joint PD topples it every time; gravity feedforward through the rigid braced legs keeps it up on every randomised world.</p>
+                    <span class="rt-badge">17/17 stance held</span>
+                </div>
+                <div class="rt-card">
+                    <div class="rt-icon">🧭</div>
+                    <h4>Autonomous rover</h4>
+                    <p class="rt-model">Differential-drive + LIDAR</p>
+                    <p class="rt-task">Map, patrol, then dock onto a target after a 13&nbsp;s patrol over randomised wheel dynamics. Dead-reckoning drifts past tolerance; LIDAR localisation returns to within 15&nbsp;cm.</p>
+                    <span class="rt-badge">12/12 docked</span>
+                </div>
+            </div>
+            <p class="rt-note">Manipulation, locomotion, flight, balance and autonomy — five control paradigms, one engine. Each result reproduced from LitSim installed as a standalone package, not from a source copy.</p>
         </div>
     </section>
 
@@ -471,7 +511,8 @@ curl -X POST https://api.vijay-v-scientific.com/qr/generate \
                     <ul class="price-list">
                         <li><strong>Sim-to-real, measured:</strong> a UR5e reaches its target in 16 of 16 randomised hardware worlds — worst 3.0&nbsp;mm, median 2.2&nbsp;mm (open-loop 202&nbsp;mm off)</li>
                         <li><strong>One method, two real arms:</strong> the same controller with no retuning drives a Franka Panda too — 16 of 16 worlds, worst 6.8&nbsp;mm, median 1.8&nbsp;mm (open-loop 1&nbsp;of&nbsp;16)</li>
-                        <li>4 built-in robots, and drives 71 real models (UR5e, Franka, Spot…) via MuJoCo Menagerie</li>
+                        <li><strong>Validated across five robot types</strong> — arm, quadruped (Go2), quadrotor (Skydio&nbsp;X2), humanoid (G1) and an autonomous rover — every controller held on 12–17 unseen randomised hardware worlds each (see the showcase above)</li>
+                        <li>Drives 71 real models (UR5e, Franka, Spot…) via MuJoCo Menagerie, plus built-in cartpole, arm, quadrotor, quadruped and a differential-drive rover</li>
                         <li>~300–5,000× realtime on one CPU core, no GPU — runs alongside your other work; 32&nbsp;KB wheel</li>
                         <li>Hardware serial bridge + domain randomisation, validated across 20 randomised worlds</li>
                     </ul>
