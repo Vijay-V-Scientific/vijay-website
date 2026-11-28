@@ -181,7 +181,40 @@
                 <figcaption class="showcase-cap">The same LitSim controller — zero retuning — on a Franka Panda (Google DeepMind Menagerie model) · green = landed inside 20&nbsp;mm · rendered headlessly, zero GPU</figcaption>
             </figure>
             <h3 class="section-label" style="margin-top:3.4rem">Not just arms</h3>
-            <p class="section-lead">The same LitSim engine — its bridge, its randomiser, its controllers — driven on five different <em>kinds</em> of robot, each solved for its own physics, then run through 16+ unseen randomised hardware worlds. Every number below is measured, headless, on CPU.</p>
+            <p class="section-lead">The same LitSim engine — its bridge, its randomiser, its controllers — driven on five different <em>kinds</em> of robot, each solved for its own physics, then run through 16+ unseen randomised hardware worlds. Every video below is the same honest side-by-side: the naive approach on the left, LitSim closed-loop on the right, one randomised hardware world, measured on CPU.</p>
+
+            <figure class="showcase-fig">
+                <video class="showcase-video" controls playsinline loop preload="metadata" poster="assets/litsim-go2-poster.jpg">
+                    <source src="assets/litsim-go2-s2r.mp4" type="video/mp4">
+                    Your browser can't play this video.
+                </video>
+                <figcaption class="showcase-cap">Unitree Go2 quadruped (Google DeepMind Menagerie model) — hold a crouch against ±20&nbsp;% mass/gain/damping, latency and encoder noise · left, an open-loop joint PD is left high (red); right, LitSim balance feedback drives it to target (green) · the video drives a deliberately deeper crouch than the headline stance so the difference is visible · rendered headlessly, zero GPU</figcaption>
+            </figure>
+
+            <figure class="showcase-fig">
+                <video class="showcase-video" controls playsinline loop preload="metadata" poster="assets/litsim-skydio-poster.jpg">
+                    <source src="assets/litsim-skydio-s2r.mp4" type="video/mp4">
+                    Your browser can't play this video.
+                </video>
+                <figcaption class="showcase-cap">Skydio X2 quadrotor (Google DeepMind Menagerie model) — hover and reject a lateral wind gust through quaternion attitude control and rotor-mixer allocation · left, the nominal open-loop command falls ~98&nbsp;cm to the ground; right, LitSim holds position to 0.6&nbsp;cm and stays level · rendered headlessly, zero GPU</figcaption>
+            </figure>
+
+            <figure class="showcase-fig">
+                <video class="showcase-video" controls playsinline loop preload="metadata" poster="assets/litsim-g1-poster.jpg">
+                    <source src="assets/litsim-g1-s2r.mp4" type="video/mp4">
+                    Your browser can't play this video.
+                </video>
+                <figcaption class="showcase-cap">Unitree G1 humanoid (Google DeepMind Menagerie model) — hold the standing stance · left, a naive arm-style joint servo topples it (702&nbsp;mm base drop); right, LitSim's gravity feedforward through the braced legs keeps it upright (1.6&nbsp;mm) · rendered headlessly, zero GPU</figcaption>
+            </figure>
+
+            <figure class="showcase-fig">
+                <video class="showcase-video" controls playsinline loop preload="metadata" poster="assets/litsim-nav-poster.jpg">
+                    <source src="assets/litsim-nav-s2r.mp4" type="video/mp4">
+                    Your browser can't play this video.
+                </video>
+                <figcaption class="showcase-cap">Autonomous rover — patrol a mapped room, then dock on a target with wheels that lie about distance · white ring = where it truly is, orange = where it thinks it is · left, dead-reckoning from wheel odometry smears the map and drifts ~20&nbsp;cm; right, LIDAR localisation stays on the ring and docks · rendered headlessly, zero GPU</figcaption>
+            </figure>
+
             <div class="rt-grid">
                 <div class="rt-card">
                     <div class="rt-icon">🦾</div>
